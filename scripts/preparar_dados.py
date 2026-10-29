@@ -87,7 +87,7 @@ def preparar_series():
         # letalidade aparente: obitos em 4 semanas / casos nas 4 semanas encerradas 2 semanas antes
         casos4 = s.casos.rolling(4, min_periods=4).sum().shift(2)
         obitos4 = s.obitos.rolling(4, min_periods=4).sum()
-        s["letalidade"] = np.where(casos4 >= 1000, obitos4 / casos4 * 100, np.nan)
+        s["letalidade"] = np.where(casos4 >= 10000, obitos4 / casos4 * 100, np.nan)
         s = s[s.casos_acum.notna() | s.vac_completa.notna()]
         s.insert(0, "iso", iso)
         linhas.append(s)

@@ -1,0 +1,238 @@
+iso,nome,tipo,continente,populacao,idosos65,idade_mediana,idh,pib_pc,rigor_medio
+AFG,Afeganistão,país,Ásia,39835428,2.6,18.6,0.511,1804.0,37.1
+ALB,Albânia,país,Europa,2872934,13.2,38.0,0.795,11803.0,56.0
+DEU,Alemanha,país,Europa,83900471,21.5,46.6,0.947,45229.0,63.9
+OWID_HIC,Alta renda,renda,,1214930230,,,,,
+OWID_NAM,América do Norte,continente,,596581283,,,,,
+OWID_SAM,América do Sul,continente,,434260137,,,,,
+AND,Andorra,país,Europa,77354,,,0.868,,47.9
+AGO,Angola,país,África,33933611,2.4,16.8,0.581,5819.0,65.0
+AIA,Anguila,país,América do Norte,15125,,,,,
+ATG,Antígua e Barbuda,país,América do Norte,98728,6.9,32.1,0.778,21491.0,
+ARG,Argentina,país,América do Sul,45605823,11.2,31.9,0.845,18934.0,67.7
+DZA,Argélia,país,África,44616626,6.2,29.1,0.748,13914.0,62.9
+ARM,Armênia,país,Ásia,2968128,11.2,35.7,0.776,8788.0,
+ABW,Aruba,país,América do Norte,107195,13.1,41.2,,35974.0,46.7
+SAU,Arábia Saudita,país,Ásia,35340680,3.3,31.9,0.854,49045.0,59.6
+AUS,Austrália,país,Oceania,25788217,15.5,37.9,0.944,44649.0,59.7
+AZE,Azerbaijão,país,Ásia,10223344,6.0,32.4,0.756,15847.0,68.1
+BHS,Bahamas,país,América do Norte,396914,9.0,34.3,0.814,27718.0,64.7
+OWID_LIC,Baixa renda,renda,,665149040,,,,,
+BGD,Bangladesh,país,Ásia,166303494,5.1,27.5,0.632,3524.0,72.5
+BRB,Barbados,país,América do Norte,287708,15.0,39.8,0.814,16978.0,59.8
+BHR,Barein,país,Ásia,1748295,2.4,32.4,0.852,43291.0,54.2
+BLZ,Belize,país,América do Norte,404915,3.9,25.0,0.716,7824.0,68.2
+BEN,Benin,país,África,12451031,3.2,18.8,0.545,2064.0,43.9
+BMU,Bermudas,país,América do Norte,62092,,,,50669.0,51.5
+BLR,Bielorrússia,país,Europa,9442867,14.8,40.3,0.823,17168.0,31.4
+BOL,Bolívia,país,América do Sul,11832936,6.7,25.4,0.718,6886.0,53.8
+BWA,Botsuana,país,África,2397240,3.9,25.8,0.735,15807.0,51.8
+BRA,Brasil,país,América do Sul,213993441,8.6,33.5,0.765,14103.0,63.3
+BRN,Brunei,país,Ásia,441532,4.6,32.4,0.838,71809.0,50.0
+BGR,Bulgária,país,Europa,6896655,20.8,44.7,0.816,18563.0,47.9
+BFA,Burquina Faso,país,África,21497097,2.4,17.6,0.452,1703.0,28.8
+BDI,Burundi,país,África,12255429,2.6,17.5,0.433,702.0,14.8
+BTN,Butão,país,Ásia,779900,4.9,28.6,0.654,8709.0,67.5
+BEL,Bélgica,país,Europa,11632334,18.6,41.8,0.931,42659.0,53.9
+BIH,Bósnia e Herzegovina,país,Europa,3263459,16.6,42.5,0.78,11714.0,46.2
+CPV,Cabo Verde,país,África,561901,4.5,25.7,0.665,6223.0,61.1
+CMR,Camarões,país,África,27224262,3.2,18.8,0.563,3365.0,39.0
+KHM,Camboja,país,Ásia,16946446,4.4,25.6,0.594,3645.0,50.7
+CAN,Canadá,país,América do Norte,38067913,17.0,41.4,0.929,44018.0,65.9
+QAT,Catar,país,Ásia,2930524,1.3,31.9,0.848,116936.0,64.8
+KAZ,Cazaquistão,país,Ásia,18994958,7.0,30.6,0.825,24056.0,71.8
+TCD,Chade,país,África,16914985,2.5,16.7,0.398,1768.0,45.1
+CHL,Chile,país,América do Sul,19212362,11.1,35.4,0.851,22767.0,66.6
+CHN,China,país,Ásia,1444216102,10.6,38.7,0.761,15309.0,71.5
+CYP,Chipre,país,Europa,896005,13.4,37.3,0.887,32415.0,58.8
+OWID_CYN,Chipre do Norte,país,Ásia,,,,,,
+VAT,Cidade do Vaticano,país,Europa,812,,,,,
+COL,Colômbia,país,América do Sul,51265841,7.6,32.2,0.767,13255.0,67.1
+COM,Comores,país,África,888456,3.0,20.4,0.554,1414.0,
+COG,Congo,país,África,5657017,3.4,19.0,0.574,4881.0,53.4
+KOR,Coreia do Sul,país,Ásia,51305184,13.9,43.4,0.916,35938.0,51.5
+CRI,Costa Rica,país,América do Norte,5139053,9.5,33.6,0.81,15525.0,59.7
+CIV,Costa do Marfim,país,África,27053629,2.9,18.7,0.538,3601.0,31.0
+HRV,Croácia,país,Europa,4081657,19.7,44.0,0.851,22670.0,45.8
+CUB,Cuba,país,América do Norte,11317498,14.7,43.1,0.783,,67.6
+CUW,Curaçao,país,América do Norte,164796,16.4,41.7,,,
+DNK,Dinamarca,país,Europa,5813302,19.7,42.3,0.94,46683.0,47.6
+DJI,Djibuti,país,África,1002197,4.2,25.4,0.524,2705.0,49.5
+DMA,Dominica,país,América do Norte,72172,,,0.742,9673.0,45.9
+EGY,Egito,país,África,104258327,5.2,25.3,0.707,10550.0,53.7
+SLV,El Salvador,país,América do Norte,6518500,8.3,27.6,0.673,7292.0,50.7
+ARE,Emirados Árabes Unidos,país,Ásia,9991083,1.1,34.0,0.89,67293.0,53.0
+ECU,Equador,país,América do Sul,17888474,7.1,28.1,0.759,10582.0,65.8
+ERI,Eritreia,país,África,3601462,3.6,19.3,0.459,1510.0,74.1
+SVK,Eslováquia,país,Europa,5449270,15.1,41.2,0.86,30155.0,53.9
+SVN,Eslovênia,país,Europa,2078723,19.1,44.5,0.917,31401.0,53.6
+ESP,Espanha,país,Europa,46745211,19.4,45.5,0.904,34272.0,57.6
+SWZ,Essuatíni,país,África,1172369,3.2,21.5,0.611,7739.0,64.3
+USA,Estados Unidos,país,América do Norte,332915074,15.4,38.3,0.926,54225.0,58.0
+EST,Estônia,país,Europa,1325188,19.5,42.7,0.892,29481.0,39.6
+ETH,Etiópia,país,África,117876226,3.5,19.8,0.485,1730.0,54.2
+OWID_EUR,Europa,continente,,748962983,,,,,
+FJI,Fiji,país,Oceania,902899,6.2,28.6,0.743,8703.0,64.2
+PHL,Filipinas,país,Ásia,111046910,4.8,25.2,0.718,7599.0,70.3
+FIN,Finlândia,país,Europa,5548361,21.2,42.8,0.938,40586.0,42.5
+FRA,França,país,Europa,67422000,19.7,42.0,0.901,38606.0,61.1
+GAB,Gabão,país,África,2278829,4.4,23.1,0.703,16562.0,67.1
+GHA,Gana,país,África,31732128,3.4,21.1,0.611,4228.0,46.2
+GEO,Geórgia,país,Ásia,3979773,14.9,38.7,0.812,9745.0,60.3
+GIB,Gibraltar,país,Europa,33691,,,,,
+GRD,Granada,país,América do Norte,113015,7.3,29.4,0.779,13594.0,
+GRL,Groenlândia,país,América do Norte,56868,,,,,39.8
+GRC,Grécia,país,Europa,10370747,20.4,45.3,0.888,24574.0,70.2
+GTM,Guatemala,país,América do Norte,18249868,4.7,22.9,0.663,7424.0,61.5
+GGY,Guernsey,país,Europa,63385,,,,,
+GUY,Guiana,país,América do Sul,790329,5.3,26.3,0.682,7435.0,66.8
+GIN,Guiné,país,África,13497237,3.1,19.0,0.477,1999.0,60.8
+GNQ,Guiné Equatorial,país,África,1449891,2.8,22.4,0.592,22605.0,
+GNB,Guiné-Bissau,país,África,2015490,3.0,19.4,0.48,1549.0,
+GMB,Gâmbia,país,África,2486937,2.3,17.5,0.496,1562.0,45.2
+HTI,Haiti,país,América do Norte,11541683,4.8,24.3,0.51,1653.0,51.2
+HND,Honduras,país,América do Norte,10062994,4.7,24.9,0.634,4542.0,77.6
+HKG,Hong Kong,país,Ásia,7552800,16.3,44.8,0.949,56055.0,61.9
+HUN,Hungria,país,Europa,9634162,18.6,43.4,0.854,26778.0,52.6
+IMN,Ilha de Man,país,Europa,85410,,,,,
+CYM,Ilhas Cayman,país,América do Norte,66498,,,,49903.0,
+COK,Ilhas Cook,país,Oceania,17572,,,,,
+FRO,Ilhas Faroé,país,Europa,49053,,,,,36.8
+FLK,Ilhas Malvinas,país,América do Sul,3528,,,,,
+MHL,Ilhas Marshall,país,Oceania,59618,,,0.704,3819.0,
+PCN,Ilhas Pitcairn,país,Oceania,47,,,,,
+SLB,Ilhas Salomão,país,Oceania,703995,3.5,20.8,0.567,2206.0,36.6
+TCA,Ilhas Turcas e Caicos,país,América do Norte,39226,,,,,
+VGB,Ilhas Virgens Britânicas,país,América do Norte,30423,,,,,
+IDN,Indonésia,país,Ásia,276361788,5.3,29.3,0.718,11189.0,65.4
+IRQ,Iraque,país,Ásia,41179351,3.2,20.0,0.674,15664.0,72.5
+IRL,Irlanda,país,Europa,4982904,13.9,38.7,0.955,67335.0,60.6
+IRN,Irã,país,Ásia,85028760,5.4,32.4,0.783,19083.0,64.7
+ISL,Islândia,país,Europa,368792,14.4,37.3,0.949,46483.0,40.6
+ISR,Israel,país,Ásia,9291000,11.7,30.6,0.919,33132.0,59.5
+ITA,Itália,país,Europa,60367471,23.0,47.9,0.892,35220.0,71.5
+YEM,Iêmen,país,Ásia,30490639,2.9,20.3,0.47,1479.0,30.9
+JAM,Jamaica,país,América do Norte,2973462,9.7,31.4,0.734,8194.0,73.7
+JPN,Japão,país,Ásia,126050796,27.0,48.2,0.919,39002.0,42.3
+JEY,Jersey,país,Europa,101073,,,,,
+JOR,Jordânia,país,Ásia,10269022,3.8,23.2,0.729,8337.0,57.9
+OWID_KOS,Kosovo,país,Europa,1782115,,,,9796.0,58.2
+KWT,Kuwait,país,Ásia,4328553,2.3,33.7,0.806,65531.0,63.5
+LAO,Laos,país,Ásia,7379358,4.0,24.4,0.613,6397.0,51.7
+LSO,Lesoto,país,África,2159067,4.5,22.2,0.527,2851.0,55.1
+LVA,Letônia,país,Europa,1866934,19.8,43.9,0.866,25064.0,49.4
+LBR,Libéria,país,África,5180208,3.1,19.2,0.48,753.0,51.8
+LIE,Liechtenstein,país,Europa,38254,,,0.919,,48.0
+LTU,Lituânia,país,Europa,2689862,19.0,43.5,0.882,29524.0,48.7
+LUX,Luxemburgo,país,Europa,634814,14.3,39.7,0.916,94278.0,48.0
+LBN,Líbano,país,Ásia,6769151,8.5,31.1,0.744,13368.0,65.3
+LBY,Líbia,país,África,6958538,4.4,29.0,0.724,17882.0,70.0
+MAC,Macau,país,Ásia,658391,9.8,39.2,,104862.0,30.4
+MKD,Macedônia do Norte,país,Europa,2082661,13.3,39.1,0.774,13111.0,
+MDG,Madagascar,país,África,28427333,2.9,19.6,0.528,1416.0,51.3
+MWI,Malaui,país,África,19647681,3.0,18.1,0.483,1095.0,47.8
+MDV,Maldivas,país,Ásia,543620,4.1,30.6,0.74,15184.0,
+MLI,Mali,país,África,20855724,2.5,16.4,0.434,2014.0,46.6
+MLT,Malta,país,Europa,516100,19.4,42.4,0.895,36513.0,52.7
+MYS,Malásia,país,Ásia,32776195,6.3,29.9,0.81,26808.0,63.6
+MAR,Marrocos,país,África,37344787,6.8,29.6,0.686,7485.0,68.4
+MRT,Mauritânia,país,África,4775110,3.1,20.3,0.546,3598.0,43.4
+MUS,Maurício,país,África,1273428,10.9,37.4,0.804,20293.0,46.2
+MMR,Mianmar (Birmânia),país,Ásia,54806014,5.7,29.1,0.583,5592.0,75.1
+FSM,Micronésia,país,Oceania,116255,4.8,23.0,0.62,3299.0,
+MDA,Moldávia,país,Europa,4024025,10.9,37.6,0.75,5190.0,54.4
+MNG,Mongólia,país,Ásia,3329282,4.0,28.6,0.737,11841.0,58.3
+MNE,Montenegro,país,Europa,628051,14.8,39.1,0.829,16409.0,
+MSR,Montserrat,país,América do Norte,4981,,,,,
+MOZ,Moçambique,país,África,32163045,3.2,17.7,0.456,1136.0,56.2
+OWID_WRL,Mundo,mundo,,7874965730,8.7,30.9,0.737,15469.0,
+MEX,México,país,América do Norte,130262220,6.9,29.3,0.779,17336.0,51.9
+MCO,Mônaco,país,Europa,39520,,,,,53.6
+NAM,Namíbia,país,África,2587344,3.6,22.0,0.646,9542.0,47.7
+NRU,Nauru,país,Oceania,10873,,,,12896.0,
+NPL,Nepal,país,Ásia,29674920,5.8,25.0,0.602,2443.0,63.1
+NIC,Nicarágua,país,América do Norte,6702379,5.4,27.3,0.66,5321.0,10.5
+NGA,Nigéria,país,África,211400704,2.8,18.1,0.539,5338.0,54.3
+NIU,Niue,país,Oceania,1614,,,,,
+NOR,Noruega,país,Europa,5465629,16.8,39.7,0.957,64800.0,48.2
+NCL,Nova Caledônia,país,Oceania,288217,10.0,33.4,,,
+NZL,Nova Zelândia,país,Oceania,5126300,15.3,37.9,0.931,36086.0,44.8
+NER,Níger,país,África,25130810,2.6,15.1,0.394,926.0,26.3
+OWID_OCE,Oceania,continente,,43219954,,,,,
+OMN,Omã,país,Ásia,5223376,2.4,30.7,0.813,37961.0,64.4
+PLW,Palau,país,Oceania,18174,,,0.826,13240.0,
+PSE,Palestina,país,Ásia,5222756,3.0,20.4,0.708,4450.0,70.4
+PAN,Panamá,país,América do Norte,4381583,7.9,29.7,0.815,22267.0,70.8
+PNG,Papua-Nova Guiné,país,Oceania,9119005,3.8,22.6,0.555,3823.0,54.1
+PAK,Paquistão,país,Ásia,225199929,4.5,23.5,0.557,5035.0,60.9
+PRY,Paraguai,país,América do Sul,7219641,6.4,26.5,0.728,8827.0,59.2
+NLD,Países Baixos,país,Europa,17173094,18.8,43.2,0.944,48473.0,58.6
+BES,Países Baixos Caribenhos,país,América do Norte,26445,,,,,
+PER,Peru,país,América do Sul,33359415,7.2,29.1,0.777,12237.0,75.8
+PYF,Polinésia Francesa,país,Oceania,282534,7.8,32.7,,,
+POL,Polônia,país,Europa,37797000,16.8,41.8,0.88,27216.0,54.3
+PRT,Portugal,país,Europa,10167923,21.5,46.2,0.864,27937.0,60.1
+KGZ,Quirguistão,país,Ásia,6628347,4.5,26.3,0.697,3393.0,57.9
+KIR,Quiribati,país,Oceania,121388,3.9,23.2,0.63,1981.0,36.2
+KEN,Quênia,país,África,54985702,2.7,20.0,0.601,2993.0,59.7
+COD,RD do Congo,país,África,92377986,3.0,17.0,0.48,808.0,45.4
+GBR,Reino Unido,país,Europa,68207114,18.5,40.8,0.932,39753.0,58.8
+OWID_UMC,Renda média-alta,renda,,2513672790,,,,,
+OWID_LMC,Renda média-baixa,renda,,3330652550,,,,,
+CAF,República Centro-Africana,país,África,4919987,3.7,18.3,0.397,661.0,31.9
+DOM,República Dominicana,país,América do Norte,10953714,7.0,27.6,0.756,14601.0,65.1
+ROU,Romênia,país,Europa,19127772,17.8,43.0,0.828,23313.0,56.9
+RWA,Ruanda,país,África,13276517,3.0,20.3,0.543,1854.0,64.3
+RUS,Rússia,país,Europa,145912022,14.2,39.6,0.824,24766.0,49.6
+WSM,Samoa,país,Oceania,200144,5.6,22.0,0.715,6022.0,
+SMR,San Marino,país,Europa,34010,,,,56861.0,48.5
+SHN,Santa Helena,país,África,6095,,,,,
+LCA,Santa Lúcia,país,América do Norte,184401,9.7,34.9,0.759,12952.0,
+SYC,Seicheles,país,África,98910,8.6,36.2,0.796,26382.0,57.1
+SEN,Senegal,país,África,17196308,3.0,18.7,0.512,2471.0,36.4
+SLE,Serra Leoa,país,África,8141343,2.5,19.1,0.452,1390.0,43.5
+SGP,Singapura,país,Ásia,5453600,12.9,42.4,0.938,85535.0,50.6
+SXM,Sint Maarten,país,América do Norte,43421,,,,36327.0,
+SOM,Somália,país,África,16359500,2.7,16.8,,,37.3
+LKA,Sri Lanka,país,Ásia,21497306,10.1,34.1,0.782,11669.0,61.3
+SDN,Sudão,país,África,44909351,3.5,19.7,0.51,4467.0,40.3
+SSD,Sudão do Sul,país,África,11381377,3.4,19.2,0.433,1570.0,53.5
+SUR,Suriname,país,América do Sul,591798,6.9,29.6,0.738,13767.0,72.2
+SWE,Suécia,país,Europa,10160159,20.0,41.0,0.945,46949.0,49.9
+CHE,Suíça,país,Europa,8715494,18.4,43.1,0.955,57410.0,50.8
+KNA,São Cristóvão e Névis,país,América do Norte,53546,,,0.779,24654.0,
+SPM,São Pedro e Miquelão,país,América do Norte,5771,,,,,
+STP,São Tomé e Príncipe,país,África,223364,2.9,18.7,0.625,3053.0,
+VCT,São Vicente e Granadinas,país,América do Norte,111269,7.7,31.8,0.738,10727.0,
+SRB,Sérvia,país,Europa,6871547,17.4,41.2,0.806,14049.0,49.5
+SYR,Síria,país,Ásia,18275704,,21.7,0.567,,50.8
+TJK,Tadjiquistão,país,Ásia,9749625,3.5,23.3,0.668,2897.0,37.2
+THA,Tailândia,país,Ásia,69950844,11.4,40.1,0.777,16278.0,50.8
+TWN,Taiwan,país,Ásia,23855008,,42.2,,,32.4
+TZA,Tanzânia,país,África,61498438,3.1,17.7,0.529,2683.0,18.7
+CZE,Tchéquia,país,Europa,10724553,19.0,43.3,0.9,32606.0,50.4
+TLS,Timor-Leste,país,Ásia,1343875,3.6,18.0,0.606,6570.0,49.0
+TGO,Togo,país,África,8478242,2.8,19.4,0.515,1430.0,48.4
+TKL,Tokelau,país,Oceania,1368,,,,,
+TON,Tonga,país,Oceania,106759,5.8,22.3,0.725,5426.0,50.0
+TTO,Trinidad e Tobago,país,América do Norte,1403374,10.0,36.2,0.796,28763.0,69.8
+TUN,Tunísia,país,África,11935764,8.0,32.7,0.74,10849.0,54.6
+TKM,Turcomenistão,país,Ásia,6117933,4.3,26.9,0.715,16389.0,59.7
+TUR,Turquia,país,Ásia,85042736,8.2,31.6,0.82,25129.0,62.4
+TUV,Tuvalu,país,Oceania,11925,,,,3575.0,
+UKR,Ucrânia,país,Europa,43466822,16.5,41.4,0.779,7894.0,60.9
+UGA,Uganda,país,África,47123533,2.2,16.4,0.544,1698.0,67.2
+OWID_EUN,União Europeia,bloco,,447189915,,,,,
+URY,Uruguai,país,América do Sul,3485152,14.7,35.6,0.817,20551.0,52.9
+UZB,Uzbequistão,país,Ásia,33935765,4.5,28.2,0.72,6253.0,51.6
+VUT,Vanuatu,país,Oceania,314464,4.4,23.1,0.609,2922.0,22.2
+VEN,Venezuela,país,América do Sul,28704947,6.6,29.0,0.711,16745.0,77.6
+VNM,Vietnã,país,Ásia,98168829,7.2,32.6,0.704,6172.0,65.3
+WLF,Wallis e Futuna,país,Oceania,11094,,,,,
+ZWE,Zimbábue,país,África,15092171,2.8,19.6,0.571,1900.0,66.4
+ZMB,Zâmbia,país,África,18920657,2.5,17.7,0.584,3689.0,43.5
+OWID_AFR,África,continente,,1373486472,,,,,
+ZAF,África do Sul,país,África,60041996,5.3,27.3,0.709,12295.0,54.8
+OWID_ASI,Ásia,continente,,4678444992,,,,,
+AUT,Áustria,país,Europa,9043072,19.2,44.4,0.922,45437.0,60.8
+IND,Índia,país,Ásia,1393409033,6.0,28.2,0.645,6427.0,69.2

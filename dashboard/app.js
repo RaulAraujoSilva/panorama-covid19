@@ -14,6 +14,7 @@ const RENDA = ['OWID_HIC', 'OWID_UMC', 'OWID_LMC', 'OWID_LIC'];
 const CONTS = ['África', 'América do Norte', 'América do Sul', 'Ásia', 'Europa', 'Oceania'];
 const POP_MIN = 1e6;
 const MAX_COMPARAR = 8;
+const LETALIDADE_MAX = 15; // teto do eixo; picos acima disso no início de 2020 ficam cortados
 const MAPA_W = 1000, MAPA_H = 435;
 const NUM = ['casos', 'obitos', 'casos_acum', 'obitos_acum', 'casos_pm', 'obitos_pm', 'casos_acum_pm',
   'obitos_acum_pm', 'vac_parcial', 'vac_completa', 'rigor', 'letalidade'];
@@ -250,14 +251,17 @@ function linhas(el, { series, fy, fv, faixas, selecao, yMax }) {
     .call(d3.axisBottom(x).ticks(nx).tickFormat(fMes).tickSizeOuter(0)).call(estiloEixo);
 
   const linha = d3.line().defined((d) => d.v != null).x((d) => x(d.d)).y((d) => y(d.v));
+  const clip = 'cv-clip-' + ++seqId;
+  svg.append('clipPath').attr('id', clip).append('rect').attr('x', ml).attr('y', top - 2)
+    .attr('width', W - mr - ml + 4).attr('height', H - bottom - top + 2);
   series.forEach((s) => {
-    svg.append('path').datum(s.pts).attr('d', linha).style('fill', 'none').style('stroke', s.cor)
+    svg.append('path').attr('clip-path', `url(#${clip})`).datum(s.pts).attr('d', linha).style('fill', 'none').style('stroke', s.cor)
       .style('stroke-width', 2).style('stroke-linecap', 'round').style('stroke-linejoin', 'round');
   });
 
   const fins = series.map((s) => {
     const u = [...s.pts].reverse().find((d) => d.v != null);
-    return u ? { s, y: y(u.v), yd: y(u.v), xd: x(u.d) } : null;
+    return u ? { s, y: y(Math.min(u.v, y.domain()[1])), yd: y(Math.min(u.v, y.domain()[1])), xd: x(u.d) } : null;
   }).filter(Boolean).sort((a, b) => a.y - b.y);
   for (let i = 1; i < fins.length; i++) if (fins[i].y - fins[i - 1].y < 13) fins[i].y = fins[i - 1].y + 13;
   const passa = fins.length ? fins[fins.length - 1].y - (H - bottom) : 0;
@@ -521,7 +525,8 @@ dash.draw('letalidade', (el) => {
   const series = p.comparar.map((iso, i) => ({
     nome: nomeDe(iso), cor: cor(i), pts: noPeriodo(S.get(iso) || [], p).map((r) => ({ d: r.d, v: r.letalidade })),
   }));
-  linhas(el, { series, fy: (v) => fInt(v) + '%', fv: (v) => f2(v) + '%' });
+  const maxV = d3.max(series.flatMap((s) => s.pts), (d) => d.v) || 1;
+  linhas(el, { series, fy: (v) => fInt(v) + '%', fv: (v) => f2(v) + '%', yMax: Math.min(maxV, LETALIDADE_MAX) });
 });
 
 dash.draw('renda', (el) => {

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panorama COVID-19</title>
+<meta name="description" content="Dashboard interativo da pandemia de COVID-19: casos, óbitos, vacinação e restrições por país, com dados do Our World in Data até 5 de março de 2022.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232F6BD8'/%3E%3Cpath d='M5 24 L11 14 L16 19 L21 8 L27 16' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --color-bg: #f6f7f9;
+    --color-panel: #ffffff;
+    --color-fg: #1b2230;
+    --color-fg-muted: #5d6676;
+    --color-border-line: #dfe3ea;
+    --color-ok: #23804a;
+    --color-warn: #a86a00;
+    --color-bad: #c23b3b;
+    --dash-c1: #2f6bd8; --dash-c2: #d1495b; --dash-c3: #2a9d8f; --dash-c4: #e09f3e;
+    --dash-c5: #7b5ea7; --dash-c6: #3d9a50; --dash-c7: #c2577e; --dash-c8: #6b7a8f;
+    --cds-chart-grid: #eceff4;
+    --cds-chart-axis: #c5cbd6;
+    --cds-chart-reference: #8a93a3;
+    --cds-chart-muted: #8a93a3;
+    --cds-surface-popover: #ffffff;
+    --cds-border: #dfe3ea;
+    --cds-shadow-popover: 0 6px 20px rgba(20, 30, 50, .12);
+    --cds-text-secondary: #5d6676;
+    --cds-skeleton: #e9ecf1;
+    --font-anthropic-sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    --font-anthropic-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --cds-font-size-caption: .8125rem;
+    --cds-font-size-body: .9375rem;
+    --cds-font-size-heading: 1.0625rem;
+    --cds-font-size-title: 1.875rem;
+    --cds-font-weight-medium: 600;
+    --cds-radius: 8px;
+    --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 14px; --cds-gap-lg: 22px; --cds-gap-xl: 32px;
+    --cds-pad-xs: 6px; --cds-pad-sm: 10px; --cds-pad-md: 14px; --cds-pad-lg: 18px; --cds-pad-xl: 28px;
+    --cds-dur-slow: 400ms;
+    --cds-ease-out: cubic-bezier(.2, .7, .2, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --color-bg: #0f141c;
+      --color-panel: #171e29;
+      --color-fg: #e6eaf1;
+      --color-fg-muted: #9aa4b5;
+      --color-border-line: #2a3342;
+      --color-ok: #5cc98a;
+      --color-warn: #e8b04f;
+      --color-bad: #f07272;
+      --dash-c1: #6f9bf0; --dash-c2: #ef7a88; --dash-c3: #4fc1b2; --dash-c4: #f2b866;
+      --dash-c5: #a68bd1; --dash-c6: #6cc27e; --dash-c7: #e085a6; --dash-c8: #9aa8ba;
+      --cds-chart-grid: #222b38;
+      --cds-chart-axis: #3a4556;
+      --cds-chart-reference: #7d889a;
+      --cds-chart-muted: #7d889a;
+      --cds-surface-popover: #1e2734;
+      --cds-border: #2f3a4b;
+      --cds-shadow-popover: 0 8px 24px rgba(0, 0, 0, .45);
+      --cds-text-secondary: #9aa4b5;
+      --cds-skeleton: #212a37;
+    }
+  }
+  html, body { margin: 0; }
+  body { background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: 15px; }
+  #dash-root {
+    max-width: 1320px; margin-inline: auto;
+    padding-block: 28px 40px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .dash-skeleton { position: relative; }
+  .dash-skeleton::after {
+    content: ""; position: absolute; inset: 0; border-radius: var(--cds-radius); background: var(--cds-skeleton);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .dash-skeleton::after { animation: dash-pulse 1.4s ease-in-out infinite; }
+    @keyframes dash-pulse { 50% { opacity: .55; } }
+  }
+  .cv-brush .overlay { cursor: crosshair; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="dash-shim.js"></script>
+</head>
+<body>
+<main id="dash-root">
+<meta name="dash-one-writer">
+<style>
+  #dash-root { --cv-chart-h: 300px; }
+  .cv { display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); font-variant-numeric: tabular-nums; }
+  .cv-head { display: grid; gap: var(--cds-gap-xs); }
+  .cv-title { margin: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); text-wrap: balance; }
+  .cv-lede { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 72ch; }
+  .cv .cv-lede b, .cv .cv-ins b { font-weight: 600; color: var(--color-fg); }
+
+  .cv-bar { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: flex-end; padding: var(--cds-pad-md) var(--cds-pad-lg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); }
+  .cv-field { display: grid; gap: var(--cds-gap-xs); min-width: 0; }
+  .cv-field > span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+  .cv-bar select, .cv-bar input, .cv-add { font: inherit; font-size: var(--cds-font-size-caption); padding: 6px 8px; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); max-width: 100%; }
+  .cv-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; }
+  .cv-seg button { font: inherit; font-size: var(--cds-font-size-caption); padding: 6px 10px; border: 0; background: var(--color-bg); color: var(--color-fg-muted); cursor: pointer; }
+  .cv-seg button + button { border-left: 1px solid var(--color-border-line); }
+  .cv-seg button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); }
+  .cv-seg button:focus-visible, .cv-reset:focus-visible, .cv-chip button:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 1px; }
+  .cv-reset { font: inherit; font-size: var(--cds-font-size-caption); padding: 6px 10px; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: transparent; color: var(--color-fg); cursor: pointer; margin-left: auto; }
+  .cv-compare { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); align-items: center; }
+  .cv-chips { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+  .cv-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 4px 3px 8px; border: 1px solid var(--color-border-line); border-radius: 999px; font-size: var(--cds-font-size-caption); background: var(--color-bg); }
+  .cv-chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .cv-chip button { border: 0; background: transparent; color: var(--color-fg-muted); cursor: pointer; font: inherit; padding: 0 4px; }
+
+  .cv-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+  .cv-kpi { display: grid; gap: var(--cds-gap-xs); align-content: start; padding: var(--cds-pad-md) var(--cds-pad-lg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); min-width: 0; }
+  .cv-kpi > span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cv-kpi strong { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.1; min-height: 1.1em; }
+  .cv-spark { height: 36px; }
+  .cv-kpi small { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cv-asof { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: calc(var(--cds-gap-md) * -1) 0 0; }
+
+  .cv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+  .cv-grid-map { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: var(--cds-gap-md); }
+  @media (max-width: 900px) { .cv-grid-map { grid-template-columns: minmax(0, 1fr); } }
+  .cv-card { display: grid; gap: var(--cds-gap-sm); align-content: start; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .cv-card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--cds-gap-sm); align-items: flex-start; }
+  .cv-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+  .cv-card p.cv-note { margin: 2px 0 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 70ch; }
+  .cv-chart { position: relative; min-height: var(--cv-chart-h); }
+  .cv-chart.cv-tall { min-height: 360px; }
+  .cv-section-title { margin: var(--cds-gap-sm) 0 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+
+  .cv-ins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--cds-gap-md); }
+  .cv-ins { display: grid; gap: var(--cds-gap-xs); align-content: start; padding: var(--cds-pad-md) var(--cds-pad-lg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); min-width: 0; }
+  .cv-ins h3 { margin: 0; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+  .cv-ins p { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.5; }
+
+  .cv-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cv-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .cv-legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  .cv-tip { position: absolute; pointer-events: none; z-index: 5; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); min-width: 9rem; max-width: 16rem; }
+  .cv-tip .cv-tip-h { color: var(--cds-text-secondary); margin-bottom: 2px; }
+  .cv-tip .cv-tip-r { display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+  .cv-tip .cv-tip-r span:first-child { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+  .cv-tip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+  .cv-map-ctl { display: flex; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cv-map-ctl input[type=range] { flex: 1; min-width: 0; }
+  .cv-map-ctl button { font: inherit; border: 1px solid var(--color-border-line); background: var(--color-bg); color: var(--color-fg); border-radius: var(--cds-radius); padding: 4px 10px; cursor: pointer; }
+  .cv svg text { fill: var(--color-fg-muted); font-size: 11px; font-family: var(--font-anthropic-sans); }
+  .cv svg .cv-lbl { fill: var(--color-fg); font-weight: 500; }
+  .cv-click { cursor: pointer; }
+  .cv-notes { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); display: grid; gap: var(--cds-gap-xs); max-width: 90ch; }
+  .cv-notes p { margin: 0; line-height: 1.5; }
+  .cv-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; height: 100%; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cv-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  @media (prefers-reduced-motion: no-preference) {
+    .cv-anim { animation: cv-in var(--cds-dur-slow) var(--cds-ease-out) both; }
+    @keyframes cv-in { from { opacity: 0; } to { opacity: 1; } }
+  }
+</style>
+
+<div class="cv">
+  <header class="cv-head" id="topo">
+    <h1 class="cv-title">Panorama COVID-19</h1>
+    <p class="cv-lede">Até a semana encerrada em <b data-draw="ultima-semana" data-source="picos" data-field="ultima_semana">—</b>, o mundo somava <b data-draw="mundo-casos" data-source="semanal" data-field="casos_acum" data-where="iso=OWID_WRL&amp;semana=2022-03-05">—</b> casos e <b data-draw="mundo-obitos" data-source="semanal" data-field="obitos_acum" data-where="iso=OWID_WRL&amp;semana=2022-03-05">—</b> óbitos confirmados, e <b data-draw="mundo-vac" data-source="semanal" data-field="vac_completa" data-where="iso=OWID_WRL&amp;semana=2022-03-05">—</b> da população tinha o esquema vacinal completo. Escolha um país em foco, compare até oito locais e recorte o período: todos os gráficos acompanham os filtros.</p>
+  </header>
+
+  <section class="cv-bar" id="filtros" aria-label="Filtros">
+    <label class="cv-field"><span>País em foco</span>
+      <select class="cv-foco" data-draw="foco" data-source="paises" aria-label="País em foco"></select>
+    </label>
+    <div class="cv-field"><span>Métrica</span>
+      <div class="cv-seg" role="group" aria-label="Métrica">
+        <button type="button" data-metrica="casos" aria-pressed="true">Casos</button>
+        <button type="button" data-metrica="obitos" aria-pressed="false">Óbitos</button>
+        <button type="button" data-metrica="vacina" aria-pressed="false">Vacinação</button>
+      </div>
+    </div>
+    <div class="cv-field"><span>Escala</span>
+      <div class="cv-seg" role="group" aria-label="Escala">
+        <button type="button" data-escala="pm" aria-pressed="true">Por milhão</button>
+        <button type="button" data-escala="abs" aria-pressed="false">Absoluto</button>
+      </div>
+    </div>
+    <label class="cv-field"><span>Continente</span>
+      <select class="cv-continente" aria-label="Continente">
+        <option value="">Todos</option>
+        <option>África</option>
+        <option>América do Norte</option>
+        <option>América do Sul</option>
+        <option>Ásia</option>
+        <option>Europa</option>
+        <option>Oceania</option>
+      </select>
+    </label>
+    <label class="cv-field"><span>De</span>
+      <input class="cv-inicio" type="date" min="2020-01-01" max="2022-03-05" aria-label="Início do período">
+    </label>
+    <label class="cv-field"><span>Até</span>
+      <input class="cv-fim" type="date" min="2020-01-01" max="2022-03-05" aria-label="Fim do período">
+    </label>
+    <button type="button" class="cv-reset">Restaurar filtros</button>
+    <div class="cv-field" style="flex-basis: 100%">
+      <span>Locais em comparação (clique no mapa ou no ranking para incluir)</span>
+      <div class="cv-compare">
+        <div class="cv-chips" data-draw="chips" data-source="paises"></div>
+        <select class="cv-add" data-draw="adicionar" data-source="paises" aria-label="Adicionar local à comparação"></select>
+      </div>
+    </div>
+  </section>
+
+  <section class="cv-kpis" id="indicadores" aria-label="Indicadores do país em foco">
+    <div class="cv-kpi"><span>Casos acumulados</span><strong data-draw="kpi" data-k="casos_acum" data-source="semanal" data-field="casos_acum">—</strong><div class="cv-spark" data-draw="spark" data-k="casos" data-source="semanal"></div><small>novos casos por semana</small></div>
+    <div class="cv-kpi"><span>Óbitos acumulados</span><strong data-draw="kpi" data-k="obitos_acum" data-source="semanal" data-field="obitos_acum">—</strong><div class="cv-spark" data-draw="spark" data-k="obitos" data-source="semanal"></div><small>óbitos por semana</small></div>
+    <div class="cv-kpi"><span>Óbitos por milhão de habitantes</span><strong data-draw="kpi" data-k="obitos_acum_pm" data-source="semanal" data-field="obitos_acum_pm">—</strong><div class="cv-spark" data-draw="spark" data-k="obitos_acum_pm" data-source="semanal"></div><small>acumulado ao longo do tempo</small></div>
+    <div class="cv-kpi"><span>Esquema vacinal completo</span><strong data-draw="kpi" data-k="vac_completa" data-source="semanal" data-field="vac_completa">—</strong><div class="cv-spark" data-draw="spark" data-k="vac_completa" data-source="semanal"></div><small>% da população</small></div>
+    <div class="cv-kpi"><span>Letalidade aparente recente</span><strong data-draw="kpi" data-k="letalidade" data-source="semanal" data-field="letalidade">—</strong><div class="cv-spark" data-draw="spark" data-k="letalidade" data-source="semanal"></div><small>óbitos ÷ casos, janela de 4 semanas</small></div>
+  </section>
+  <p class="cv-asof">Valores de <b data-draw="foco-nome" data-source="paises" data-field="nome">—</b> na última semana do período com dado disponível. Curvas: período selecionado.</p>
+
+  <section class="cv-card" id="ondas">
+    <div class="cv-card-head">
+      <div>
+        <h2>As ondas da pandemia</h2>
+        <p class="cv-note">
+          <span data-m="casos" data-e="pm">Novos casos por semana, por milhão de habitantes.</span>
+          <span data-m="casos" data-e="abs" hidden>Novos casos por semana.</span>
+          <span data-m="obitos" data-e="pm" hidden>Óbitos por semana, por milhão de habitantes.</span>
+          <span data-m="obitos" data-e="abs" hidden>Óbitos por semana.</span>
+          <span data-m="vacina" hidden>Percentual da população com esquema vacinal completo.</span>
+          Faixas: períodos aproximados de predominância global das variantes. Arraste sobre o gráfico para recortar o período; clique duas vezes para voltar ao período completo.
+        </p>
+      </div>
+    </div>
+    <div class="cv-chart cv-tall dash-skeleton" data-draw="ondas" data-source="semanal paises"></div>
+  </section>
+
+  <div class="cv-grid-map">
+    <section class="cv-card" id="mapa">
+      <div class="cv-card-head">
+        <div>
+          <h2>O mapa semana a semana</h2>
+          <p class="cv-note">
+            <span data-m="casos" data-e="pm">Casos acumulados por milhão de habitantes.</span>
+            <span data-m="casos" data-e="abs" hidden>Casos acumulados.</span>
+            <span data-m="obitos" data-e="pm" hidden>Óbitos acumulados por milhão de habitantes.</span>
+            <span data-m="obitos" data-e="abs" hidden>Óbitos acumulados.</span>
+            <span data-m="vacina" hidden>Percentual da população com esquema vacinal completo.</span>
+            Use o controle para escolher a semana ou ▶ para animar. Clique num país para colocá-lo em foco.
+          </p>
+        </div>
+      </div>
+      <div class="cv-chart dash-skeleton" data-draw="mapa" data-source="semanal paises mapa"></div>
+    </section>
+
+    <section class="cv-card" id="ranking">
+      <div class="cv-card-head">
+        <div>
+          <h2>Ranking de países</h2>
+          <p class="cv-note">
+            <span data-m="casos" data-e="pm">Casos por milhão no período.</span>
+            <span data-m="casos" data-e="abs" hidden>Casos no período.</span>
+            <span data-m="obitos" data-e="pm" hidden>Óbitos por milhão no período.</span>
+            <span data-m="obitos" data-e="abs" hidden>Óbitos no período.</span>
+            <span data-m="vacina" hidden>% com esquema completo ao fim do período.</span>
+            Os 15 maiores entre países com mais de 1 milhão de habitantes.
+          </p>
+        </div>
+      </div>
+      <div class="cv-chart cv-tall dash-skeleton" data-draw="ranking" data-source="semanal paises"></div>
+    </section>
+  </div>
+
+  <h2 class="cv-section-title" id="achados">O que os dados mostram</h2>
+  <section class="cv-ins-grid">
+    <article class="cv-ins">
+      <h3>Os picos de casos e de óbitos não coincidiram</h3>
+      <p>O mundo teve sua pior semana em casos na encerrada em <b data-draw="txt" data-k="semana_pico_casos" data-source="picos" data-field="semana_pico_casos">—</b>, com <b data-draw="txt" data-k="pico_casos" data-source="picos" data-field="pico_casos">—</b> registros. A pior semana em óbitos veio um ano antes, em <b data-draw="txt" data-k="semana_pico_obitos" data-source="picos" data-field="semana_pico_obitos">—</b>, com <b data-draw="txt" data-k="pico_obitos" data-source="picos" data-field="pico_obitos">—</b> mortes.</p>
+    </article>
+    <article class="cv-ins">
+      <h3>A vacinação chegou de forma desigual</h3>
+      <p>Ao fim da série, <b data-draw="pct" data-source="semanal" data-field="vac_completa" data-where="iso=OWID_HIC&amp;semana=2022-03-05">—</b> da população dos países de alta renda tinha o esquema completo. Nos de baixa renda, eram <b data-draw="pct" data-source="semanal" data-field="vac_completa" data-where="iso=OWID_LIC&amp;semana=2022-03-05">—</b>.</p>
+    </article>
+    <article class="cv-ins">
+      <h3>Mais renda, mais óbitos registrados</h3>
+      <p>Países de alta renda acumulavam <b data-draw="num" data-source="semanal" data-field="obitos_acum_pm" data-where="iso=OWID_HIC&amp;semana=2022-03-05">—</b> óbitos por milhão; os de baixa renda, <b data-draw="num" data-source="semanal" data-field="obitos_acum_pm" data-where="iso=OWID_LIC&amp;semana=2022-03-05">—</b>. População mais velha explica parte da diferença; a subnotificação nos países pobres explica outra.</p>
+    </article>
+    <article class="cv-ins">
+      <h3>Onde a mortalidade foi maior</h3>
+      <p><b data-draw="txt" data-k="nome" data-source="lider" data-field="nome">—</b> teve a maior mortalidade registrada entre países com mais de 1 milhão de habitantes: <b data-draw="txt" data-k="obitos_acum_pm" data-source="lider" data-field="obitos_acum_pm">—</b> óbitos por milhão.</p>
+    </article>
+  </section>
+
+  <div class="cv-grid">
+    <section class="cv-card" id="renda">
+      <div>
+        <h2>Corrida vacinal por renda</h2>
+        <p class="cv-note">% da população com esquema completo, por grupo de renda do Banco Mundial.</p>
+      </div>
+      <div class="cv-chart dash-skeleton" data-draw="renda" data-source="semanal paises"></div>
+    </section>
+
+    <section class="cv-card" id="letalidade">
+      <div>
+        <h2>Casos e óbitos se descolaram</h2>
+        <p class="cv-note">Letalidade aparente: óbitos em 4 semanas ÷ casos nas 4 semanas encerradas duas semanas antes. A queda reflete mais testagem, vacinação e a Ômicron. Eixo limitado a 15%.</p>
+      </div>
+      <div class="cv-chart dash-skeleton" data-draw="letalidade" data-source="semanal paises"></div>
+    </section>
+
+    <section class="cv-card" id="dispersao">
+      <div class="cv-card-head">
+        <div>
+          <h2>O que acompanha a mortalidade</h2>
+          <p class="cv-note">Óbitos acumulados por milhão ao fim do período. Bolha proporcional à população.</p>
+        </div>
+        <div class="cv-seg" role="group" aria-label="Eixo horizontal">
+          <button type="button" data-eixo="idosos65" aria-pressed="true">65+ anos</button>
+          <button type="button" data-eixo="idh" aria-pressed="false">IDH</button>
+          <button type="button" data-eixo="pib_pc" aria-pressed="false">PIB per capita</button>
+          <button type="button" data-eixo="rigor_medio" aria-pressed="false">Restrições</button>
+        </div>
+      </div>
+      <div class="cv-legend">
+        <span><i data-cont="0"></i>África</span>
+        <span><i data-cont="1"></i>América do Norte</span>
+        <span><i data-cont="2"></i>América do Sul</span>
+        <span><i data-cont="3"></i>Ásia</span>
+        <span><i data-cont="4"></i>Europa</span>
+        <span><i data-cont="5"></i>Oceania</span>
+      </div>
+      <div class="cv-chart dash-skeleton" data-draw="dispersao" data-source="semanal paises"></div>
+    </section>
+
+    <section class="cv-card" id="restricoes">
+      <div>
+        <h2>Restrições e contágio no país em foco</h2>
+        <p class="cv-note">Barras: novos casos por milhão na semana. Linha: índice de rigor das restrições de Oxford (0 a 100).</p>
+      </div>
+      <div class="cv-chart dash-skeleton" data-draw="rigor" data-source="semanal paises"></div>
+    </section>
+  </div>
+
+  <footer class="cv-notes" id="notas">
+    <p>Fonte: Our World in Data, COVID-19 dataset, publicado no Kaggle por George Saavedra (CC0), retrato de 5 de março de 2022. Contornos dos países: Natural Earth 1:110m.</p>
+    <p>Série diária agregada por semana (encerrada no sábado). Números confirmados dependem da testagem de cada país e subestimam a circulação real, sobretudo onde se testou pouco. Letalidade aparente não é a letalidade da infecção. Regiões, blocos e grupos de renda ficam fora do ranking e do mapa.</p>
+  </footer>
+</div>
+<script src="app.js"></script>
+
+</main>
+</body>
+</html>
