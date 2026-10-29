@@ -1,0 +1,4 @@
+data/raw/
+data/geo/
+build/
+__pycache__/
